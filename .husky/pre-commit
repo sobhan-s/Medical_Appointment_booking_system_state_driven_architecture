@@ -1,0 +1,12 @@
+echo "✅ Running lint-staged (auto-fix staged files)..."
+npx lint-staged || exit 1
+
+echo "✅ Running Format document"
+# npm
+
+echo "✅ Running full commit checks (lint + typecheck + prettier-check)..."
+npm run test:commit || exit 1
+
+npx lint-staged || exit 1
+
+echo "✅ All checks passed. Commit allowed "
