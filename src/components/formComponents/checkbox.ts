@@ -1,6 +1,6 @@
 import { createElement } from '../../lib/createElement';
 
-export function createCheckbox(
+export function createCheckboxElement(
   name: string,
   id: string,
   value: string,

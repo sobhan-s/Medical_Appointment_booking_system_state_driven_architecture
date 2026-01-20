@@ -1,6 +1,6 @@
 import { createElement } from '../../lib/createElement';
 
-export function createRadio(
+export function createRadioElement(
   name: string,
   id: string,
   value: string,

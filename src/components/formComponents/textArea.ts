@@ -1,6 +1,6 @@
 import { createElement } from '../../lib/createElement';
 
-export function createTextarea(
+export function createTextareaElement(
   name: string,
   id: string,
   placeholder?: string,

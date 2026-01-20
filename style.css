@@ -1,0 +1,518 @@
+:root {
+  --color-body-bg: linear-gradient(180deg, #32df66b2, #32df6642);
+  --color-progress-bar-track: #ffffff7a;
+  --color-progress-bar-thumb: #31303088;
+  --color-progress-bar-thumb-hover: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background: var(--color-body-bg);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.primeContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.main_container {
+  flex-direction: column;
+  max-width: 620px;
+  max-height: auto;
+  margin: 0;
+  display: flex;
+  gap: 0;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.left_part {
+  width: 100%;
+  background: linear-gradient(180deg, #2e7d32, #1b5e20);
+  padding: 24px 20px;
+  color: white;
+}
+
+.left_part h1 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.left_part p {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-bottom: 32px;
+}
+
+.progress_section {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding-bottom: 8px;
+  overflow-x: auto;
+}
+
+.progress_items {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.progress_items.active {
+  opacity: 1;
+}
+
+.progress_items.complited {
+  opacity: 0.8;
+}
+
+.progress_step_number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.progress_items.active .progress_step_number {
+  background: white;
+  color: #2e7d32;
+}
+
+.progress_items.complited .progress_step_number {
+  background: #4caf50;
+  color: white;
+}
+
+.progress_items.complited .progress_step_number::after {
+  content: '✓';
+}
+
+.progress_items.complited .progress_step_number span {
+  display: none;
+}
+
+.progress_step_info h3 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.right_part {
+  flex: 1;
+  padding: 40px 48px;
+  max-width: 900px;
+}
+
+.form_step {
+  display: none;
+  animation: fadeAnimaiton 0.4s ease;
+}
+
+@keyframes fadeAnimaiton {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form_step.active {
+  display: block;
+}
+
+.form_step h2 {
+  color: #1b5e20;
+  font-size: 28px;
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+.form {
+  margin-bottom: 24px;
+}
+
+.right_part label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.right_part label .required {
+  color: #f44336;
+  margin-left: 2px;
+}
+
+.right_part label .optional {
+  color: #7c7a7adc;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.right_part .form #email,
+.right_part .form #name,
+.right_part .form #phone,
+.right_part .form #lastVisit,
+.right_part .form #doctor,
+.right_part .form #appointmentDate,
+.right_part .form #timeSlot,
+.right_part .form #reasonForVisit,
+.right_part .form #medications,
+.right_part .form #allergies {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: white;
+  /* vertical-align: baseline;     */
+}
+
+.right_part .form #email:focus,
+.right_part .form #name:focus,
+.right_part .form #phone:focus,
+.right_part .form #lastVisit:focus,
+.right_part .form #doctor:focus,
+.right_part .form #appointmentDate:focus,
+.right_part .form #timeSlot:focus,
+.right_part .form #reasonForVisit:focus,
+.right_part .form #medications:focus,
+.right_part .form #allergies:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+.error {
+  border-color: #f44336;
+}
+
+.success {
+  border-color: #4caf50;
+}
+
+.phone_input_group {
+  display: flex;
+  gap: 12px;
+}
+
+.phone_prefix {
+  width: 90px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  padding-left: 15px;
+  display: flex;
+}
+
+.phone_input_group .phone {
+  flex: 1;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.checkbox_group,
+.radio_groups {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.checkbox_items,
+.radio_items {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.checkbox_items:hover,
+.radio_items:hover {
+  background: #f5f5f5;
+}
+
+.checkbox_items .notification,
+.radioCousultationType,
+.radioMedicalRecords {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox_items label,
+.radio_items label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 400;
+  color: #555;
+}
+
+.termsAndConditions {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.termsAndConditions:hover {
+  text-decoration: underline;
+}
+
+.next_form {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  justify-content: flex-end;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.next_btn,
+.submit_btn {
+  background: #4caf50;
+  color: white;
+}
+
+.next_btn:hover,
+.submit_btn:hover {
+  background: #388e3c;
+}
+
+.prev_btn {
+  background: whitesmoke;
+  color: #666;
+}
+
+.prev_btn:hover {
+  background: #e0e0e0;
+}
+
+.errorMsg {
+  color: #f44336;
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+#successModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#successModal.show {
+  display: flex;
+}
+
+.modal_content {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  border: 2px solid rgb(146, 121, 121);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal_content .success_icon {
+  width: 80px;
+  height: 80px;
+  background: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: white;
+  font-size: 40px;
+}
+
+.modal_content h2 {
+  color: #2e7d32;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.modal_content p {
+  color: #666;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.modal_content .btn {
+  width: 100%;
+  padding: 14px 32px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  .primeContainer {
+    flex-direction: column;
+  }
+
+  .main_container {
+    flex-direction: column;
+    border-radius: 0;
+    max-width: 800px;
+  }
+
+  .left_part {
+    width: 100%;
+    padding: 24px 20px;
+  }
+
+  .left_part h1 {
+    font-size: 22px;
+  }
+
+  .left_part p {
+    margin-bottom: 20px;
+  }
+
+  .progress_section {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 8px;
+  }
+
+  .progress_items {
+    flex-direction: column;
+    gap: 8px;
+    min-width: 60px;
+  }
+
+  .progress_step_info h3 {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .right_part {
+    padding: 24px 20px;
+  }
+
+  .form_step h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    margin-bottom: 20px;
+  }
+
+  .phone_input_group {
+    flex-direction: column;
+  }
+
+  .phone_prefix {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .checkbox_group,
+  .radio_groups {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .next_form {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .modal_content {
+    padding: 32px 24px;
+  }
+}
