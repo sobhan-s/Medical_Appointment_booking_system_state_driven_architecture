@@ -26,5 +26,6 @@ export function saveToStorage(): void {
 
 export function clearStorage(): void {
   localStorage.removeItem(STORAGE_KEY);
+
   state.appointments = [];
 }
