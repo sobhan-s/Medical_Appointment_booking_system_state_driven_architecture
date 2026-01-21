@@ -28,7 +28,6 @@ export function AppointmentInfo(): HTMLDivElement {
   );
   container.appendChild(heading);
 
-  // Doctor selection
   const doctorForm = createElement('div', 'form');
   doctorForm.appendChild(createLabelElement('Select a doctor', true));
   const doctorSelect = createSelectElement(
@@ -147,16 +146,21 @@ export function AppointmentInfo(): HTMLDivElement {
   const navForm = createElement('div', 'next_form');
   const prevBtn = createButton('Previous', 'btn prev_btn', 'button');
   const nextBtn = createButton('Next', 'btn next_btn', 'button');
+  nextBtn.id = 'next2';
+  prevBtn.id = 'prev2';
 
-  const errors = validateStep2(state.formData);
-  nextBtn.disabled = Object.keys(errors).length > 0;
+  // const errors = validateStep2(state.formData);
+  // nextBtn.disabled = Object.keys(errors).length > 0;
 
   prevBtn.addEventListener('click', (): void => {
     state.currentStep = 1;
     renderApp();
   });
 
+  // nextBtn.removeEventListener('click')
   nextBtn.addEventListener('click', (): void => {
+    // console.log('next button is clicked ');
+    // alert('askdhfiasdf');
     const errors = validateStep2(state.formData);
     if (Object.keys(errors).length === 0) {
       const fullPhone = state.formData.phonePrefix + state.formData.phone;

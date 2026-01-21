@@ -1,6 +1,5 @@
 import { state } from '../../app.state';
 import { validateStep1 } from '../../app.logic';
-// import { renderApp } from "../app";
 import { createElement } from '../../lib/createElement';
 import {
   createInputElement,
@@ -152,19 +151,21 @@ export function PersonalInfo(): HTMLDivElement {
   const nextBtn = createButton('Next →', 'btn next_btn', 'button');
   nextBtn.id = 'next1';
 
-  const errors = validateStep1(state.formData);
-  console.log(errors);
+  // const errors = validateStep1(state.formData);
+  // console.log(errors);
   // nextBtn.disabled = Object.keys(errors).length > 0;
 
   nextBtn.addEventListener('click', (): void => {
-    alert('clicked');
+    // alert('clicked');
     const errors = validateStep1(state.formData);
     if (Object.keys(errors).length === 0) {
       state.currentStep = 2;
       renderApp();
     }
-    console.log(state.currentStep);
+    // console.log(state.currentStep);
   });
+
+  // nextBtn.removeEventListener('click', () => console.log('event is removed'));
 
   navForm.appendChild(nextBtn);
   container.appendChild(navForm);
