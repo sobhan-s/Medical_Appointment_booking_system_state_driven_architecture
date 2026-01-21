@@ -13,7 +13,8 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "test:commit": "npm run lint && npm run typecheck && npm run format:check",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "lint-staged": {
     "*.{ts,tsx,js}": [
