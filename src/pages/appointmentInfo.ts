@@ -1,20 +1,20 @@
-import { state } from '../../app.state';
-import { validateStep2, checkDuplicateAppointment } from '../../app.logic';
-import { createElement } from '../../lib/createElement';
+import { state } from '../app.state';
+import { validateStep2, checkDuplicateAppointment } from '../app.logic';
+import { createElement } from '../lib/createElement';
 import {
   createInputElement,
   createLabelElement,
   createSelectElement,
   createTextareaElement,
-} from '../formComponents/index';
+} from '../components/formComponents/index';
 import {
   showError,
   clearError,
   addErrorClass,
   removeErrorClass,
-} from '../../utils/error';
-import { createButton } from '../button';
-import { renderApp } from '../app';
+} from '../utils/error';
+import { createButton } from '../components/button';
+import { renderApp } from '../components/app';
 
 export function AppointmentInfo(): HTMLDivElement {
   const container = createElement('div', 'form_step');

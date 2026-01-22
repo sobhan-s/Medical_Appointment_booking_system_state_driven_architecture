@@ -1,5 +1,3 @@
-// components/AppointmentsTable.ts - State-driven table rendering
-
 import { state } from '../app.state';
 import {
   sortAppointments,

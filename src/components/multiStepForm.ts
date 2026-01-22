@@ -1,9 +1,9 @@
 import { state } from '../app.state';
-import { PersonalInfo } from './steps/basicInfo';
+import { PersonalInfo } from '../pages/basicInfo';
 import { createElement } from '../lib/createElement';
-import { AppointmentInfo } from './steps/appointmentInfo';
-import { MedicalInfo } from './steps/medicalInfo';
-import { FinalDetails } from './steps/finalDetail';
+import { AppointmentInfo } from '../pages/appointmentInfo';
+import { MedicalInfo } from '../pages/medicalInfo';
+import { FinalDetails } from '../pages/finalDetail';
 
 export function multiStepForm(): HTMLFormElement {
   const form = createElement('form', 'appointmentForm') as HTMLFormElement;

@@ -1,16 +1,16 @@
-import { state } from '../../app.state';
-import { validateStep3 } from '../../app.logic';
-import { renderApp } from '../app';
-import { createElement } from '../../lib/createElement';
+import { state } from '../app.state';
+import { validateStep3 } from '../app.logic';
+import { renderApp } from '../components/app';
+import { createElement } from '../lib/createElement';
 import {
   createLabelElement,
   createTextareaElement,
   createCheckboxElement,
-} from '../../components/formComponents';
+} from '../components/formComponents';
 
-import { createButton } from '../button';
+import { createButton } from '../components/button';
 
-import { clearError, showError } from '../../utils/error';
+import { clearError, showError } from '../utils/error';
 
 export function MedicalInfo(): HTMLDivElement {
   const container = createElement('div', 'form_step');
