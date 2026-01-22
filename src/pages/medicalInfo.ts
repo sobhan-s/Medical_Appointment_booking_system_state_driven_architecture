@@ -6,6 +6,7 @@ import {
   createLabelElement,
   createTextareaElement,
   createCheckboxElement,
+  createInputElement,
 } from '../components/formComponents';
 
 import { createButton } from '../components/button';
@@ -29,9 +30,11 @@ export function MedicalInfo(): HTMLDivElement {
   concernsForm.appendChild(createLabelElement('Current Concerns', true));
 
   const concernsGroup = createElement('div', 'checkbox_group');
+  let othersTextBox: HTMLInputElement | null = null;
 
   const concerns = [
     { id: 'concern1', value: 'Fever', label: 'Fever' },
+
     { id: 'concern2', value: 'cough', label: 'cough' },
     { id: 'concern3', value: 'cancer', label: 'cancer' },
     { id: 'concern4', value: 'piles', label: 'piles' },
@@ -51,14 +54,37 @@ export function MedicalInfo(): HTMLDivElement {
 
     const input = checkboxWrapper.querySelector('input') as HTMLInputElement;
 
-    input.addEventListener('click', (e) => {
+    input.addEventListener('change', (e) => {
       const target = e.target as HTMLInputElement;
 
-      // console.log('Checkbox changed:', value, target.checked);
-      if (target.checked) {
-        target.checked = true;
-      } else {
-        target.checked = false;
+      if (value === 'others') {
+        if (target.checked) {
+          othersTextBox = createInputElement(
+            'text',
+            'othersTextBox',
+            'Enter your current concerns...',
+          );
+
+          othersTextBox.classList.add('others-input');
+
+          othersTextBox.addEventListener('input', (e) => {
+            const inputTarget = e.target as HTMLInputElement;
+
+            state.formData.otherConcern = inputTarget.value.trim();
+          });
+
+          if (state.formData.otherConcern) {
+            othersTextBox.value = state.formData.otherConcern;
+          }
+
+          concernsGroup.appendChild(othersTextBox);
+        } else {
+          if (othersTextBox && othersTextBox.parentNode) {
+            othersTextBox.parentNode.removeChild(othersTextBox);
+            othersTextBox = null;
+          }
+          state.formData.otherConcern = '';
+        }
       }
 
       if (target.checked) {
@@ -70,10 +96,7 @@ export function MedicalInfo(): HTMLDivElement {
           (c) => c !== value,
         );
       }
-      // console.log(
-      //   'current adshfkashdf healthecon:',
-      //   state.formData.healthConcerns,
-      // );
+
       const errors = validateStep3(state.formData);
 
       if (errors.healthConcerns) {
@@ -86,21 +109,37 @@ export function MedicalInfo(): HTMLDivElement {
     concernsGroup.appendChild(checkboxWrapper);
   });
 
-  concernsForm.appendChild(concernsGroup);
+  if (state.formData.healthConcerns.includes('others')) {
+    othersTextBox = createInputElement(
+      'text',
+      'othersTextBox',
+      'Enter your current concerns...',
+    );
 
+    othersTextBox.classList.add('othersInput');
+
+    othersTextBox.addEventListener('input', (e) => {
+      const inputTarget = e.target as HTMLInputElement;
+
+      state.formData.otherConcern = inputTarget.value.trim();
+    });
+
+    if (state.formData.otherConcern) {
+      othersTextBox.value = state.formData.otherConcern;
+    }
+
+    concernsGroup.appendChild(othersTextBox);
+  }
+
+  concernsForm.appendChild(concernsGroup);
   container.appendChild(concernsForm);
 
   const medsForm = createElement('div', 'form');
-
   medsForm.appendChild(createLabelElement('Current Medications', false));
-
   const medsTextarea = createTextareaElement(
     'medications',
-
     'medications',
-
     "List any medications you're currently taking",
-
     state.formData.medications,
   );
 

@@ -161,6 +161,22 @@ export function PersonalInfo(): HTMLDivElement {
     if (Object.keys(errors).length === 0) {
       state.currentStep = 2;
       renderApp();
+    } else {
+      if (errors.email) {
+        showError(emailForm, errors.email);
+      }
+
+      if (errors.name) {
+        showError(emailForm, errors.email);
+      }
+
+      if (errors.phone) {
+        showError(emailForm, errors.email);
+      }
+
+      if (errors.lastVisit) {
+        showError(emailForm, errors.email);
+      }
     }
     // console.log(state.currentStep);
   });

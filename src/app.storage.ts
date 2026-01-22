@@ -3,17 +3,29 @@ import type { AppointmentFormData } from './types/formData.type';
 
 const STORAGE_KEY = 'appointments';
 
-export function loadFromStorage(): void {
+export function loadFromStorage(): AppointmentFormData[] | undefined {
   try {
     const rawData = localStorage.getItem(STORAGE_KEY);
+    let appointments: AppointmentFormData[];
     if (rawData) {
-      const appointments: AppointmentFormData[] = JSON.parse(rawData);
+      appointments = JSON.parse(rawData);
       state.appointments = appointments;
+      return appointments;
     }
   } catch (error) {
     // console.log('Failed to load appointments:', error);
     state.appointments = [];
+    // return
   }
+}
+
+export function sortAppointments(): AppointmentFormData[] {
+  const appointments = loadFromStorage() as AppointmentFormData[];
+  return [...appointments].sort((a, b) => {
+    const dateA = new Date(`${a.appointmentDate} ${a.timeSlot.split('-')[0]}`);
+    const dateB = new Date(`${b.appointmentDate} ${b.timeSlot.split('-')[0]}`);
+    return dateA.getTime() - dateB.getTime();
+  });
 }
 
 export function saveToStorage(): void {

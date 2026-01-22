@@ -10,6 +10,7 @@ export const initialFormData: FormState = {
   appointmentDate: '',
   timeSlot: '',
   reasonForVisit: '',
+  otherConcern: '',
   healthConcerns: [],
   medications: '',
   allergies: '',

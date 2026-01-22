@@ -1,9 +1,6 @@
 import { state } from '../app.state';
-import {
-  sortAppointments,
-  formatDate,
-  appointmentToFormData,
-} from '../app.logic';
+import { formatDate, appointmentToFormData } from '../app.logic';
+import { sortAppointments } from '../app.storage';
 import { saveToStorage } from '../app.storage';
 import { renderApp } from './app';
 import { createElement } from '../lib/createElement';
@@ -48,7 +45,7 @@ export function AppointmentsTable(): HTMLDivElement {
   const tbody = createElement('tbody') as HTMLTableSectionElement;
   tbody.id = 'tableBody';
 
-  const sorted = sortAppointments(state.appointments);
+  const sorted = sortAppointments();
 
   if (sorted.length === 0) {
     const emptyRow = createElement('tr') as HTMLTableRowElement;

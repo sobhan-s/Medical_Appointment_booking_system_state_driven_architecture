@@ -150,16 +150,6 @@ export function formatDate(dateString: string): string {
   });
 }
 
-export function sortAppointments(
-  appointments: AppointmentFormData[],
-): AppointmentFormData[] {
-  return [...appointments].sort((a, b) => {
-    const dateA = new Date(`${a.appointmentDate} ${a.timeSlot.split('-')[0]}`);
-    const dateB = new Date(`${b.appointmentDate} ${b.timeSlot.split('-')[0]}`);
-    return dateA.getTime() - dateB.getTime();
-  });
-}
-
 export function formDataToAppointment(
   formData: FormState,
   id?: string,
@@ -176,6 +166,7 @@ export function formDataToAppointment(
     appointmentDate: formData.appointmentDate,
     timeSlot: formData.timeSlot,
     reasonForVisit: formData.reasonForVisit,
+    otherConcern: formData.otherConcern,
     healthConcerns: [...formData.healthConcerns],
     medications: formData.medications,
     allergies: formData.allergies,
@@ -200,6 +191,7 @@ export function appointmentToFormData(
     appointmentDate: appointment.appointmentDate,
     timeSlot: appointment.timeSlot,
     reasonForVisit: appointment.reasonForVisit,
+    otherConcern: appointment.otherConcern,
     healthConcerns: [...appointment.healthConcerns],
     medications: appointment.medications,
     allergies: appointment.allergies,

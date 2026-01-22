@@ -9,6 +9,7 @@ export interface AppointmentFormData {
   appointmentDate: string;
   timeSlot: string;
   reasonForVisit: string;
+  otherConcern: string;
   healthConcerns: string[];
   medications: string;
   allergies: string;
@@ -30,6 +31,7 @@ export interface FormState {
   appointmentDate: string;
   timeSlot: string;
   reasonForVisit: string;
+  otherConcern: string;
   healthConcerns: string[];
   medications: string;
   allergies: string;
