@@ -1,11 +1,11 @@
 // import { state } from '../app.state';
-import { ProgressSection } from './progressSection';
-import { multiStepForm } from './multiStepForm';
-import { AppointmentsTable } from './appointmentTable';
+import { ProgressSection } from './forms/progressSection';
+import { multiStepForm } from './forms/multiStepForm';
+import { AppointmentsTable } from './table/appointmentTable';
 import { createElement } from '../lib/createElement';
-import { SuccessModal } from './successModal';
+import { SuccessModal } from './modals/successModal';
 import { initTheme } from '../app.storage';
-import { ThemeSwitcher } from './themeSwitcher';
+import { ThemeSwitcher } from './themes/themeSwitcher';
 
 export function renderApp(): void {
   initTheme();

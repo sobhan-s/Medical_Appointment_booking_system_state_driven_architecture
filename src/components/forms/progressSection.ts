@@ -1,6 +1,6 @@
-import { state } from '../app.state';
-import { createElement } from '../lib/createElement';
-import type { ProgressStep } from '../types/progressStep.type';
+import { state } from '../../app.state';
+import { createElement } from '../../lib/createElement';
+import type { ProgressStep } from '../../types/progressStep.type';
 
 const steps: ProgressStep[] = [
   { step: 1, title: 'Personal Info' },

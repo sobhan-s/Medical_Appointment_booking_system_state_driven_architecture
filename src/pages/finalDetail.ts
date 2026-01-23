@@ -7,8 +7,8 @@ import {
   createLabelElement,
   createCheckboxElement,
   createRadioElement,
-} from '../components';
-import { createButton } from '../components/button';
+} from '../components/ui';
+import { createButton } from '../components/ui/button';
 import { clearError, showError } from '../utils/error';
 
 export function FinalDetails(): HTMLDivElement {
