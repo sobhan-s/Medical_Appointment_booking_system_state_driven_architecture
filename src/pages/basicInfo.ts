@@ -5,7 +5,7 @@ import {
   createInputElement,
   createLabelElement,
   createSelectElement,
-} from '../components/formComponents/index';
+} from '../components/index';
 import {
   showError,
   clearError,

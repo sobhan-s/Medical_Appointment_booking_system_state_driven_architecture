@@ -10,19 +10,19 @@ const emailRegex =
 const phoneRegex = /^[1-9][0-9]{9}$/;
 const nameRegex = /^[a-zA-Z\s]+$/;
 
-export function validateEmail(email: string): boolean {
+function validateEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
-export function validatePhone(phone: string): boolean {
+function validatePhone(phone: string): boolean {
   return phoneRegex.test(phone);
 }
 
-export function validateName(name: string): boolean {
+function validateName(name: string): boolean {
   return nameRegex.test(name);
 }
 
-export function validateStep1(formData: FormState): ValidationErrors {
+function validateStep1(formData: FormState): ValidationErrors {
   const errors: ValidationErrors = {};
 
   if (!formData.email) {
@@ -57,7 +57,7 @@ export function validateStep1(formData: FormState): ValidationErrors {
   return errors;
 }
 
-export function validateStep2(formData: FormState): ValidationErrors {
+function validateStep2(formData: FormState): ValidationErrors {
   const errors: ValidationErrors = {};
 
   if (!formData.doctor) {
@@ -88,7 +88,7 @@ export function validateStep2(formData: FormState): ValidationErrors {
   return errors;
 }
 
-export function validateStep3(formData: FormState): ValidationErrors {
+function validateStep3(formData: FormState): ValidationErrors {
   const errors: ValidationErrors = {};
 
   if (formData.healthConcerns.length === 0) {
@@ -98,7 +98,7 @@ export function validateStep3(formData: FormState): ValidationErrors {
   return errors;
 }
 
-export function validateStep4(formData: FormState): ValidationErrors {
+function validateStep4(formData: FormState): ValidationErrors {
   const errors: ValidationErrors = {};
 
   if (!formData.medicalRecord) {
@@ -120,7 +120,7 @@ export function validateStep4(formData: FormState): ValidationErrors {
   return errors;
 }
 
-export function checkDuplicateAppointment(
+function checkDuplicateAppointment(
   appointments: AppointmentFormData[],
   email: string,
   phone: string,
@@ -141,7 +141,7 @@ export function checkDuplicateAppointment(
   });
 }
 
-export function formatDate(dateString: string): string {
+function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -150,7 +150,7 @@ export function formatDate(dateString: string): string {
   });
 }
 
-export function formDataToAppointment(
+function formDataToAppointment(
   formData: FormState,
   id?: string,
 ): AppointmentFormData {
@@ -178,9 +178,7 @@ export function formDataToAppointment(
   };
 }
 
-export function appointmentToFormData(
-  appointment: AppointmentFormData,
-): FormState {
+function appointmentToFormData(appointment: AppointmentFormData): FormState {
   return {
     email: appointment.email,
     name: appointment.name,
@@ -202,3 +200,14 @@ export function appointmentToFormData(
     notifications: [...appointment.notifications],
   };
 }
+
+export {
+  validateStep1,
+  validateStep2,
+  validateStep3,
+  validateStep4,
+  checkDuplicateAppointment,
+  formatDate,
+  formDataToAppointment,
+  appointmentToFormData,
+};

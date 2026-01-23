@@ -6,7 +6,7 @@ import {
   createLabelElement,
   createSelectElement,
   createTextareaElement,
-} from '../components/formComponents/index';
+} from '../components/index';
 import {
   showError,
   clearError,

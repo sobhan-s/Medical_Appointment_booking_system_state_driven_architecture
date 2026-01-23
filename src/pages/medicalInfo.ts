@@ -7,7 +7,7 @@ import {
   createTextareaElement,
   createCheckboxElement,
   createInputElement,
-} from '../components/formComponents';
+} from '../components';
 
 import { createButton } from '../components/button';
 
@@ -34,7 +34,6 @@ export function MedicalInfo(): HTMLDivElement {
 
   const concerns = [
     { id: 'concern1', value: 'Fever', label: 'Fever' },
-
     { id: 'concern2', value: 'cough', label: 'cough' },
     { id: 'concern3', value: 'cancer', label: 'cancer' },
     { id: 'concern4', value: 'piles', label: 'piles' },

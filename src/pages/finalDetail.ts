@@ -2,13 +2,12 @@ import { state, initialFormData } from '../app.state';
 import { validateStep4, formDataToAppointment } from '../app.logic';
 import { saveToStorage } from '../app.storage';
 import { renderApp } from '../components/app';
-import { clearEditParam } from '../utils/id';
 import { createElement } from '../lib/createElement';
 import {
   createLabelElement,
   createCheckboxElement,
   createRadioElement,
-} from '../components/formComponents';
+} from '../components';
 import { createButton } from '../components/button';
 import { clearError, showError } from '../utils/error';
 
@@ -264,7 +263,6 @@ export function FinalDetails(): HTMLDivElement {
       state.currentStep = 1;
       state.isEditMode = false;
       state.editingId = null;
-      clearEditParam();
     }
   });
 

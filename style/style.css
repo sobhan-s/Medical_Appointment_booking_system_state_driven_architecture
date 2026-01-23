@@ -1,9 +1,35 @@
 :root {
   --color-body-bg: linear-gradient(180deg, #32df66b2, #32df6642);
+  --color-card-bg: #ffffff;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-white: #ffffff;
+  --color-primary: #2e7d32;
+  --color-primary-dark: #1b5e20;
+  --color-primary-light: #4caf50;
+  --color-border: #e0e0e0;
+  --color-hover-bg: #f5f5f5;
+  --color-input-bg: #ffffff;
   --color-progress-bar-track: #ffffff7a;
   --color-progress-bar-thumb: #31303088;
-  --color-progress-bar-thumb-hover: #555;
-  /* --color-body-dark-bg :  */
+  --color-modal-border: rgb(146, 121, 121);
+}
+
+[data-theme='dark'] {
+  --color-body-bg: linear-gradient(180deg, #1a4d2e, #0d2818);
+  --color-card-bg: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #b0b0b0;
+  --color-text-white: #ffffff;
+  --color-primary: #4caf50;
+  --color-primary-dark: #2e7d32;
+  --color-primary-light: #66bb6a;
+  --color-border: #404040;
+  --color-hover-bg: #2a2a2a;
+  --color-input-bg: #2a2a2a;
+  --color-progress-bar-track: #40404088;
+  --color-progress-bar-thumb: #66bb6a88;
+  --color-modal-border: #4caf50;
 }
 
 * {
@@ -31,16 +57,20 @@ body {
   margin: 0;
   display: flex;
   gap: 0;
-  background: white;
+  background: var(--color-card-bg);
   border-radius: 16px;
   overflow: hidden;
 }
 
 .left_part {
   width: 100%;
-  background: linear-gradient(180deg, #2e7d32, #1b5e20);
+  background: linear-gradient(
+    180deg,
+    var(--color-primary),
+    var(--color-primary-dark)
+  );
   padding: 24px 20px;
-  color: white;
+  color: var(--color-text-white);
 }
 
 .left_part h1 {
@@ -95,12 +125,12 @@ body {
 
 .progress_items.active .progress_step_number {
   background: white;
-  color: #2e7d32;
+  color: var(--color-primary);
 }
 
 .progress_items.complited .progress_step_number {
-  background: #4caf50;
-  color: white;
+  background: var(--color-primary-light);
+  color: var(--color-text-white);
 }
 
 .progress_items.complited .progress_step_number::after {
@@ -143,7 +173,7 @@ body {
 }
 
 .form_step h2 {
-  color: #1b5e20;
+  color: var(--color-primary-dark);
   font-size: 28px;
   margin-bottom: 32px;
   font-weight: 600;
@@ -156,7 +186,7 @@ body {
 .right_part label {
   display: block;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--color-text-primary);
   font-weight: 500;
   font-size: 14px;
 }
@@ -184,13 +214,13 @@ body {
 .right_part .form #allergies {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--color-border);
   border-radius: 8px;
   font-size: 15px;
   font-family: inherit;
   transition: all 0.2s ease;
-  background: white;
-  /* vertical-align: baseline;     */
+  background: var(--color-input-bg);
+  color: var(--color-text-secondary);
 }
 
 .right_part .form #email:focus,
@@ -204,7 +234,7 @@ body {
 .right_part .form #medications:focus,
 .right_part .form #allergies:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: var(--color-primary-light);
 }
 
 .error {
@@ -212,7 +242,7 @@ body {
 }
 
 .success {
-  border-color: #4caf50;
+  border-color: var(--color-primary-light);
 }
 
 .phone_input_group {
@@ -224,9 +254,10 @@ body {
   width: 90px;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid var(--color-border);
   padding-left: 15px;
   display: flex;
+  background-color: var(--color-input-bg);
 }
 
 .phone_input_group .phone {
@@ -260,7 +291,7 @@ textarea {
 
 .checkbox_items:hover,
 .radio_items:hover {
-  background: #f5f5f5;
+  background: var(--color-hover-bg);
 }
 
 .checkbox_items .notification,
@@ -281,7 +312,7 @@ textarea {
 }
 
 .termsAndConditions {
-  color: #2e7d32;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 500;
   margin-bottom: 12px;
@@ -313,8 +344,8 @@ textarea {
 
 .next_btn,
 .submit_btn {
-  background: #4caf50;
-  color: white;
+  background: var(--color-primary-light);
+  color: var(--color-text-white);
 }
 
 .next_btn:hover,
@@ -324,11 +355,11 @@ textarea {
 
 .prev_btn {
   background: whitesmoke;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .prev_btn:hover {
-  background: #e0e0e0;
+  background: var(--color-border);
 }
 
 .errorMsg {
@@ -403,24 +434,24 @@ textarea {
 .modal_content .success_icon {
   width: 80px;
   height: 80px;
-  background: #4caf50;
+  background: var(--color-primary-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 24px;
-  color: white;
+  color: var(--color-text-white);
   font-size: 40px;
 }
 
 .modal_content h2 {
-  color: #2e7d32;
+  color: var(--color-primary);
   margin-bottom: 16px;
   font-size: 24px;
 }
 
 .modal_content p {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 24px;
   line-height: 1.6;
 }

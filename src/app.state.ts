@@ -1,6 +1,7 @@
 import type { AppState, FormState } from './types/formData.type';
+import type { ThemeState } from './types/theme.type';
 
-export const initialFormData: FormState = {
+const initialFormData: FormState = {
   email: '',
   name: '',
   phonePrefix: '+91',
@@ -21,7 +22,7 @@ export const initialFormData: FormState = {
   notifications: [],
 };
 
-export const state: AppState = {
+const state: AppState = {
   currentStep: 1,
   totalSteps: 4,
   appointments: [],
@@ -30,3 +31,9 @@ export const state: AppState = {
   isEditMode: false,
   editingId: null,
 };
+
+const themeState: ThemeState = {
+  currentTheme: 'light',
+};
+
+export { initialFormData, state, themeState };

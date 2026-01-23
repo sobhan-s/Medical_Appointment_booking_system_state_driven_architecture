@@ -1,4 +1,4 @@
-import { createElement } from '../../lib/createElement';
+import { createElement } from '../lib/createElement';
 
 export function createInputElement(
   type: string,

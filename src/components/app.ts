@@ -4,8 +4,11 @@ import { multiStepForm } from './multiStepForm';
 import { AppointmentsTable } from './appointmentTable';
 import { createElement } from '../lib/createElement';
 import { SuccessModal } from './successModal';
+import { initTheme } from '../app.storage';
+import { ThemeSwitcher } from './themeSwitcher';
 
 export function renderApp(): void {
+  initTheme();
   const root = document.getElementById('app');
 
   if (!root) {
@@ -26,6 +29,10 @@ export function renderApp(): void {
     'Please fill the form to schedule an Appointment',
   );
 
+  const headerWrapper = createElement('div', 'header_wrapper');
+  // headerWrapper.appendChild(ThemeSwitcher());
+  headerWrapper.appendChild(heading);
+
   leftPart.appendChild(heading);
   leftPart.appendChild(subtext);
   leftPart.appendChild(ProgressSection());
@@ -39,10 +46,15 @@ export function renderApp(): void {
   const dashboardContainer = createElement('div', 'container');
 
   const header = createElement('div', 'header');
+  const jodi = createElement('div', 'jodi');
+
   const headerTitle = createElement('h1', '', '📋 Admin Dashboard');
   const headerDesc = createElement('p', '', 'Manage all patient appointments');
-  header.appendChild(headerTitle);
-  header.appendChild(headerDesc);
+  jodi.appendChild(headerTitle);
+  jodi.appendChild(headerDesc);
+  header.appendChild(jodi);
+  header.appendChild(ThemeSwitcher());
+  // header.appendChild(headerDesc);
 
   dashboardContainer.appendChild(header);
   dashboardContainer.appendChild(AppointmentsTable());
