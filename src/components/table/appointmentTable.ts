@@ -1,10 +1,10 @@
-import { state } from '../app.state';
-import { formatDate, appointmentToFormData } from '../app.logic';
-import { sortAppointments } from '../app.storage';
-import { saveToStorage } from '../app.storage';
-import { renderApp } from './app';
-import { createElement } from '../lib/createElement';
-import type { AppointmentFormData } from '../types/formData.type';
+import { state } from '../../app.state';
+import { formatDate, appointmentToFormData } from '../../app.logic';
+import { sortAppointments } from '../../app.storage';
+import { saveToStorage } from '../../app.storage';
+import { renderApp } from '../app';
+import { createElement } from '../../lib/createElement';
+import type { AppointmentFormData } from '../../types/formData.type';
 
 export function AppointmentsTable(): HTMLDivElement {
   const container = createElement('div', 'tableContainer');

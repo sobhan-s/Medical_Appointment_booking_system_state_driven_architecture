@@ -7,9 +7,9 @@ import {
   createTextareaElement,
   createCheckboxElement,
   createInputElement,
-} from '../components';
+} from '../components/ui';
 
-import { createButton } from '../components/button';
+import { createButton } from '../components/ui/button';
 
 import { clearError, showError } from '../utils/error';
 

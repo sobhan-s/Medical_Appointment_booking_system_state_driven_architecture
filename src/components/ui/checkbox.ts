@@ -1,4 +1,4 @@
-import { createElement } from '../lib/createElement';
+import { createElement } from '../../lib/createElement';
 
 export function createCheckboxElement(
   name: string,

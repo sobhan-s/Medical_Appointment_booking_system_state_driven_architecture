@@ -1,6 +1,6 @@
-import { createElement } from '../lib/createElement';
-import { themeState } from '../app.state';
-import { toggleTheme } from '../app.storage';
+import { createElement } from '../../lib/createElement';
+import { themeState } from '../../app.state';
+import { toggleTheme } from '../../app.storage';
 
 export function ThemeSwitcher(): HTMLElement {
   const container = createElement('div', 'theme_switcher_container');

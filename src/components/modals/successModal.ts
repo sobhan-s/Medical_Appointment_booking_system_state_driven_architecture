@@ -1,6 +1,6 @@
-import { state } from '../app.state';
-import { renderApp } from './app';
-import { createElement } from '../lib/createElement';
+import { state } from '../../app.state';
+import { renderApp } from '../app';
+import { createElement } from '../../lib/createElement';
 
 export function SuccessModal(): HTMLDivElement {
   const modal = createElement('div', 'modal');

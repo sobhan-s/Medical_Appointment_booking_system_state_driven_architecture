@@ -5,14 +5,14 @@ import {
   createInputElement,
   createLabelElement,
   createSelectElement,
-} from '../components/index';
+} from '../components/ui/index';
 import {
   showError,
   clearError,
   addErrorClass,
   removeErrorClass,
 } from '../utils/error';
-import { createButton } from '../components/button';
+import { createButton } from '../components/ui/button';
 import { renderApp } from '../components/app';
 
 export function PersonalInfo(): HTMLDivElement {
