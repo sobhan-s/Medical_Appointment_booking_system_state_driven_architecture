@@ -1,5 +1,5 @@
 import { state } from '../app.state';
-import { validateStep3 } from '../app.logic';
+import { validateStep3 } from '../validations/app.logic';
 import { renderApp } from '../components/app';
 import { createElement } from '../lib/createElement';
 import {

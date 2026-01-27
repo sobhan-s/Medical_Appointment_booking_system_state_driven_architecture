@@ -1,5 +1,8 @@
 import { state } from '../app.state';
-import { validateStep2, checkDuplicateAppointment } from '../app.logic';
+import {
+  validateStep2,
+  checkDuplicateAppointment,
+} from '../validations/app.logic';
 import { createElement } from '../lib/createElement';
 import {
   createInputElement,

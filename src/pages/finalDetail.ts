@@ -1,5 +1,5 @@
 import { state, initialFormData } from '../app.state';
-import { validateStep4, formDataToAppointment } from '../app.logic';
+import { validateStep4, formDataToAppointment } from '../validations/app.logic';
 import { saveToStorage } from '../app.storage';
 import { renderApp } from '../components/app';
 import { createElement } from '../lib/createElement';

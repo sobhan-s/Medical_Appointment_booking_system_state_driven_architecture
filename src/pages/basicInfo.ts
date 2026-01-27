@@ -1,5 +1,5 @@
 import { state } from '../app.state';
-import { validateStep1 } from '../app.logic';
+import { validateStep1 } from '../validations/app.logic';
 import { createElement } from '../lib/createElement';
 import {
   createInputElement,
