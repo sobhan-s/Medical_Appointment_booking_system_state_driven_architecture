@@ -1,4 +1,4 @@
-import { ILabelProps } from '../../types/uiElement.types';
+import type { ILabelProps } from '../../types/uiElement.types';
 
 export const Label: React.FC<ILabelProps> = ({
   text,

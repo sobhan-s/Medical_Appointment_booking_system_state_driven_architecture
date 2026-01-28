@@ -8,6 +8,9 @@ export const Input: React.FC<IInputProps> = ({
   placeholder,
   value,
   checked,
+  onChange,
+  disabled = false,
+  ...restProps
 }) => {
   return (
     <input
@@ -18,6 +21,9 @@ export const Input: React.FC<IInputProps> = ({
       placeholder={placeholder}
       value={value}
       checked={checked}
+      onChange={onChange}
+      disabled={disabled}
+      {...restProps}
     />
   );
 };

@@ -1,15 +1,16 @@
-interface ITextAreaProps {
-  name: string;
-  id: string;
-  placeHolder?: string;
-  value?: string;
-}
+import type { ITextAreaProps } from '../../types/uiElement.types';
 
 export const TextArea: React.FC<ITextAreaProps> = ({
   name,
   id,
   placeHolder,
   value,
+  onChange,
+  disabled = false,
+  rows,
+  cols,
+  className,
+  ...restProps
 }) => {
   return (
     <textarea
@@ -17,6 +18,12 @@ export const TextArea: React.FC<ITextAreaProps> = ({
       id={id}
       placeholder={placeHolder}
       value={value}
-    ></textarea>
+      onChange={onChange}
+      disabled={disabled}
+      rows={rows}
+      cols={cols}
+      className={className}
+      {...restProps}
+    />
   );
 };

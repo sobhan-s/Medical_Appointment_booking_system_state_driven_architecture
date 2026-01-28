@@ -1,4 +1,4 @@
-import { ICheckboxProps } from '../../types/uiElement.types';
+import type { ICheckboxProps } from '../../types/uiElement.types';
 import { Input } from './Input';
 
 export const Checkbox: React.FC<ICheckboxProps> = ({
