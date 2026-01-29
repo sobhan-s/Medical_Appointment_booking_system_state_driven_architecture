@@ -21,7 +21,7 @@ export interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement>
 export interface ICheckboxProps {
   name: string;
   id: string;
-  value: string;
+  value?: string;
   labelText: string;
   checked?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

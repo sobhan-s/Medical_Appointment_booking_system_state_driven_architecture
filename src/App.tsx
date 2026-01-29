@@ -1,43 +1,39 @@
-// import { Button } from "./components/ui/Button"
-import { Button } from './components/ui/Button';
-// import { Input } from './components/ui/Input';
-// import Input from "./components/ui/input"
-// import "../styles/style.css"
-import { Checkbox } from './components/ui/CheckBox';
-import { Select } from './components/ui/Selects';
+import React from 'react';
+import { AppProvider } from './context/app.contexts';
+import { MultiStepForm } from './components/form/MultiStepForm';
+import { ProgressSection } from './components/form/ProgressBar';
+import { AppointmentsTable } from './components/Table/AppointmentTable';
+import { ThemeSwitcher } from './components/theme/ThemeSwticher';
 
-function App() {
-  const optionss = [
-    {
-      value: 'hello1',
-      text: 'hello1',
-    },
-    {
-      value: 'hello2',
-      text: 'hello2',
-    },
-    {
-      value: 'hello3',
-      text: 'hello3',
-    },
-    {
-      value: 'hello4',
-      text: 'hello4',
-    },
-  ];
+const App: React.FC = () => {
   return (
-    <div>
-      <Button className="next_btn btn" text="click me" />
-      <Checkbox
-        className="checkbox_items"
-        name="healthConcerns"
-        id="healthConcerns"
-        value="hello"
-        labelText="hello"
-      />
-      <Select name="hell" id="hell" options={optionss} value="val" />
-    </div>
+    <AppProvider>
+      <div id="app">
+        <div className="primeContainer">
+          <div className="main_container">
+            <div className="left_part">
+              <h1>Book Appointment</h1>
+              <p>Please fill the form to schedule an Appointment</p>
+              <ProgressSection />
+            </div>
+            <div className="right_part">
+              <MultiStepForm />
+            </div>
+          </div>
+          <div className="container">
+            <div className="header">
+              <div className="jodi">
+                <h1>📋 Admin Dashboard</h1>
+                <p>Manage all patient appointments</p>
+              </div>
+              <ThemeSwitcher />
+            </div>
+            <AppointmentsTable />
+          </div>
+        </div>
+      </div>
+    </AppProvider>
   );
-}
+};
 
 export default App;
