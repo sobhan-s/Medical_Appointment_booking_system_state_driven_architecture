@@ -109,7 +109,7 @@ export const MedicalInfo: React.FC = () => {
           )}
         </div>
         {errors.healthConcerns && (
-          <span className="error_message">{errors.healthConcerns.message}</span>
+          <span className="erroMsg">{errors.healthConcerns.message}</span>
         )}
       </div>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppContext } from '../../context/app.contexts';
-import { loadFromStorage } from '../../db/storage.db';
 import {
   sortAppointments,
   formatDate,
@@ -9,12 +8,12 @@ import {
 import type { AppointmentFormData } from '../../types/form.types';
 
 export const AppointmentsTable: React.FC = () => {
-  const { deleteAppointment, setEditMode, setFormData, setCurrentStep } =
+  const {appointments, deleteAppointment, setEditMode, setFormData, setCurrentStep } =
     useAppContext();
 
-  const appointmentListFromLocalStorage = loadFromStorage();
+  // const appointmentListFromLocalStorage = loadFromStorage();
 
-  const sortedAppointments = sortAppointments(appointmentListFromLocalStorage);
+  const sortedAppointments = sortAppointments(appointments);
 
   const handleUpdate = (appointment: AppointmentFormData) => {
     setEditMode(true, appointment.id);

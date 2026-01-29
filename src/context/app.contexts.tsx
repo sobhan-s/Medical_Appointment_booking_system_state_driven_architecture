@@ -6,7 +6,7 @@ import type {
   FormState,
 } from '../types/form.types';
 import type { Theme } from '../types/theme.types';
-import { saveToStorage } from '../db/storage.db';
+import { loadFromStorage, saveToStorage } from '../db/storage.db';
 import { loadTheme, saveTheme } from '../components/theme/theme';
 
 const initialFormData: FormState = {
@@ -57,10 +57,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [theme, setTheme] = useState<Theme>(loadTheme());
 
-  // useEffect(() => {
-  //   const loaded = loadFromStorage();
-  //   setAppointmentsState(loaded);
-  // }, []);
+  useEffect(() => {
+    const loaded = loadFromStorage();
+    setAppointmentsState(loaded);
+  }, []);
 
   useEffect(() => {
     saveTheme(theme);

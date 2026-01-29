@@ -49,7 +49,8 @@ export const FinalDetails: React.FC = () => {
     setShowSuccessModal(true);
     setTimeout(() => {
       setShowSuccessModal(false);
-      resetForm();
+      resetForm()
+      window.location.reload()
     }, 2000);
     // resetForm()
   };
@@ -107,7 +108,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.medicalRecord && (
-            <span className="error_message">
+            <span className="erroMsg">
               {errors.medicalRecord.message}
             </span>
           )}
@@ -128,7 +129,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.consultationType && (
-            <span className="error_message">
+            <span className="erroMsg">
               {errors.consultationType.message}
             </span>
           )}
@@ -161,7 +162,7 @@ export const FinalDetails: React.FC = () => {
             />
           </div>
           {(errors.term1 || errors.term2) && (
-            <span className="error_message">
+            <span className="erroMsg">
               {errors.term1?.message || errors.term2?.message}
             </span>
           )}
@@ -182,7 +183,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.notifications && (
-            <span className="error_message">
+            <span className="erroMsg">
               {errors.notifications.message}
             </span>
           )}

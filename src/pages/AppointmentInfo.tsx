@@ -75,7 +75,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('doctor')}
         />
         {errors.doctor && (
-          <span className="error_message">{errors.doctor.message}</span>
+          <span className="erroMsg">{errors.doctor.message}</span>
         )}
       </div>
 
@@ -87,7 +87,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('appointmentDate')}
         />
         {errors.appointmentDate && (
-          <span className="error_message">
+          <span className="erroMsg">
             {errors.appointmentDate.message}
           </span>
         )}
@@ -110,7 +110,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('timeSlot')}
         />
         {errors.timeSlot && (
-          <span className="error_message">{errors.timeSlot.message}</span>
+          <span className="errorMsg">{errors.timeSlot.message}</span>
         )}
       </div>
 
@@ -123,7 +123,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('reasonForVisit')}
         />
         {errors.reasonForVisit && (
-          <span className="error_message">{errors.reasonForVisit.message}</span>
+          <span className="erroMsg">{errors.reasonForVisit.message}</span>
         )}
         <small style={{ display: 'block', marginTop: '5px', color: '#666' }}>
           Minimum 10 characters, Maximum 200 characters
