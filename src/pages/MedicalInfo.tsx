@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
+import { useAppStore } from '../context/app.contexts';
+import type { CompleteFormData } from '../validations';
 import { Label } from '../components/ui/Label';
 import { Input } from '../components/ui/Input';
-// import { Checkbox } from '../components/ui/CheckBox';
-import { TextArea } from '../components/ui/TextArea';
+import { Checkbox } from '../components/ui/CheckBox';
+import { Textarea } from '../components/ui/TextArea';
 import { Button } from '../components/ui/Button';
-import { useAppContext } from '../context/app.contexts';
-import type { CompleteFormData } from '../validations/index';
+import { cn } from '../lib/utils';
 
 export const MedicalInfo: React.FC = () => {
   const {
@@ -18,7 +19,7 @@ export const MedicalInfo: React.FC = () => {
     getValues,
   } = useFormContext<CompleteFormData>();
 
-  const { setCurrentStep } = useAppContext();
+  const { setCurrentStep } = useAppStore();
   const [showOthersInput, setShowOthersInput] = useState(false);
 
   const healthConcerns = useWatch({
@@ -48,10 +49,10 @@ export const MedicalInfo: React.FC = () => {
 
   const concerns = [
     { id: 'concern1', value: 'Fever', label: 'Fever' },
-    { id: 'concern2', value: 'cough', label: 'cough' },
-    { id: 'concern3', value: 'cancer', label: 'cancer' },
-    { id: 'concern4', value: 'piles', label: 'piles' },
-    { id: 'concern5', value: 'others', label: 'others' },
+    { id: 'concern2', value: 'cough', label: 'Cough' },
+    { id: 'concern3', value: 'cancer', label: 'Cancer' },
+    { id: 'concern4', value: 'piles', label: 'Piles' },
+    { id: 'concern5', value: 'others', label: 'Others' },
   ];
 
   const handleCheckboxChange = (value: string, checked: boolean) => {
@@ -59,99 +60,124 @@ export const MedicalInfo: React.FC = () => {
     if (checked) {
       setValue('healthConcerns', [...currentValues, value]);
     } else {
-      setValue(
-        'healthConcerns',
-        currentValues.filter((v) => v !== value),
-      );
+      setValue('healthConcerns', currentValues.filter((v) => v !== value));
     }
     trigger('healthConcerns');
   };
 
   return (
-    <div className="form_step active" data-step="3">
-      <h2 className="medicalInfoHeader">Medical Information</h2>
+    <div className="form_step active animate-fadeIn" data-step="3">
+      <h2 className="medicalInfoHeader text-3xl font-semibold text-primary-dark mb-8">
+        Medical Information
+      </h2>
 
-      <div className="form">
-        <Label text="Current Concerns" required htmlFor="healthConcerns" />
-        <div className="checkbox_group">
+      {/* Current Concerns */}
+      <div className="form mb-6">
+        <Label
+          htmlFor="healthConcerns"
+          className={cn(
+            'block mb-3 text-sm font-medium',
+            errors.healthConcerns && 'text-destructive'
+          )}
+        >
+          Current Concerns <span className="required text-red-500">*</span>
+        </Label>
+        <div className="checkbox_group space-y-3">
           {concerns.map(({ id, value, label }) => (
             <Controller
               key={id}
               name="healthConcerns"
               control={control}
-              render={({ field }: any) => (
-                <div className="checkbox_items">
-                  <input
-                    type="checkbox"
-                    name="healthConcerns"
-                    // labelText={label}
+              render={({ field }) => (
+                <div className="checkbox_items flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 transition-colors">
+                  <Checkbox
                     id={id}
-                    value={value}
                     checked={field.value?.includes(value) || false}
-                    onChange={(e) => {
-                      handleCheckboxChange(value, e.target.checked);
+                    onCheckedChange={(checked) => {
+                      handleCheckboxChange(value, checked as boolean);
                     }}
                   />
-                  <label htmlFor={id}>{label}</label>
+                  <Label
+                    htmlFor={id}
+                    className="text-sm font-normal cursor-pointer flex-1 m-0"
+                  >
+                    {label}
+                  </Label>
                 </div>
               )}
             />
           ))}
 
           {showOthersInput && (
-            <Input
-              type="text"
-              id="otherConcern"
-              placeholder="Enter your current concerns..."
-              className="others-input"
-              {...register('otherConcern')}
-            />
+            <div className="mt-3 ml-7">
+              <Input
+                type="text"
+                id="otherConcern"
+                placeholder="Please specify your concerns..."
+                className="others-input"
+                {...register('otherConcern')}
+              />
+            </div>
           )}
         </div>
         {errors.healthConcerns && (
-          <span className="erroMsg">{errors.healthConcerns.message}</span>
+          <span className="error_message text-destructive text-sm mt-2 block animate-shake">
+            {errors.healthConcerns.message}
+          </span>
         )}
       </div>
 
-      <div className="form">
-        <Label text="Current Medications" htmlFor="medications" />
-        <TextArea
+      {/* Current Medications (Optional) */}
+      <div className="form mb-6">
+        <div className="flex items-center gap-2 mb-2">
+          <Label htmlFor="medications" className="text-sm font-medium">
+            Current Medications
+          </Label>
+          <span className="optional text-xs text-muted-foreground">(optional)</span>
+        </div>
+        <Textarea
           id="medications"
-          placeHolder="List any medications you're currently taking"
+          placeholder="List any medications you're currently taking"
           rows={4}
+          className="w-full resize-y min-h-[100px]"
           {...register('medications')}
         />
-        <label>
-          <span className="optional">(optional)</span>
-        </label>
       </div>
 
-      <div className="form">
-        <Label text="Allergies" htmlFor="allergies" />
-        <TextArea
+      {/* Allergies (Optional) */}
+      <div className="form mb-6">
+        <div className="flex items-center gap-2 mb-2">
+          <Label htmlFor="allergies" className="text-sm font-medium">
+            Allergies
+          </Label>
+          <span className="optional text-xs text-muted-foreground">(optional)</span>
+        </div>
+        <Textarea
           id="allergies"
-          placeHolder="List any known allergies"
+          placeholder="List any known allergies"
           rows={4}
+          className="w-full resize-y min-h-[100px]"
           {...register('allergies')}
         />
-        <label>
-          <span className="optional">(optional)</span>
-        </label>
       </div>
 
-      <div className="next_form">
+      {/* Navigation */}
+      <div className="next_form flex flex-col-reverse sm:flex-row justify-end gap-3 mt-8">
         <Button
-          text="Previous"
-          className="btn prev_btn"
           type="button"
           onClick={handlePrevious}
-        />
+          variant="outline"
+          className="btn prev_btn w-full sm:w-auto"
+        >
+          Previous
+        </Button>
         <Button
-          text="Next"
-          className="btn next_btn"
           type="button"
           onClick={handleNext}
-        />
+          className="btn next_btn w-full sm:w-auto bg-primary-light hover:bg-primary text-white"
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

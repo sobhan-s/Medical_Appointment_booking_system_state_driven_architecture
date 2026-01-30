@@ -1,20 +1,30 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useAppStore } from '../context/app.contexts';
+import type { CompleteFormData } from '../validations';
 import { Label } from '../components/ui/Label';
 import { Input } from '../components/ui/Input';
-import { Select } from '../components/ui/Selects';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui/select';
 import { Button } from '../components/ui/Button';
-import { useAppContext } from '../context/app.contexts';
-import type { CompleteFormData } from '../validations/index';
+import { cn } from '../lib/utils';
 
 export const PersonalInfo: React.FC = () => {
   const {
     register,
     formState: { errors },
     trigger,
+    setValue,
+    watch,
   } = useFormContext<CompleteFormData>();
 
-  const { setCurrentStep } = useAppContext();
+  const { setCurrentStep } = useAppStore();
+  const phonePrefix = watch('phonePrefix');
 
   const handleNext = async () => {
     const isValid = await trigger([
@@ -30,77 +40,132 @@ export const PersonalInfo: React.FC = () => {
   };
 
   return (
-    <div className="form_step active" data-step="1">
-      <h2 className="basicInfo">Basic information</h2>
+    <div className="form_step active animate-fadeIn" data-step="1">
+      <h2 className="basicInfo text-3xl font-semibold text-primary-dark mb-8">
+        Basic information
+      </h2>
 
-      {/* Email Field */}
-      <div className="form">
-        <Label text="Email" required htmlFor="email" />
+      <div className="form mb-6">
+        <Label
+          htmlFor="email"
+          className={cn('block mb-2 text-sm font-medium', errors.email && 'text-destructive')}
+        >
+          Email <span className="required text-red-500">*</span>
+        </Label>
         <Input
           type="email"
           id="email"
           placeholder="Enter your email"
+          className={cn(
+            'w-full transition-all',
+            errors.email && 'border-destructive focus-visible:ring-destructive'
+          )}
           {...register('email')}
         />
         {errors.email && (
-          <span className="errorMsg">{errors.email.message}</span>
+          <span className="errorMsg text-destructive text-sm mt-1 block animate-shake">
+            {errors.email.message}
+          </span>
         )}
       </div>
 
-      <div className="form">
-        <Label text="Full Name" required htmlFor="name" />
+      <div className="form mb-6">
+        <Label
+          htmlFor="name"
+          className={cn('block mb-2 text-sm font-medium', errors.name && 'text-destructive')}
+        >
+          Full Name <span className="required text-red-500">*</span>
+        </Label>
         <Input
           type="text"
           id="name"
           placeholder="Enter your name"
+          className={cn(
+            'w-full transition-all',
+            errors.name && 'border-destructive focus-visible:ring-destructive'
+          )}
           {...register('name')}
         />
-        {errors.name && <span className="errorMsg">{errors.name.message}</span>}
+        {errors.name && (
+          <span className="errorMsg text-destructive text-sm mt-1 block animate-shake">
+            {errors.name.message}
+          </span>
+        )}
       </div>
 
-      <div className="form">
-        <Label text="Phone Number" required htmlFor="phone" />
-        <div className="phone_input_group">
+      <div className="form mb-6">
+        <Label
+          htmlFor="phone"
+          className={cn('block mb-2 text-sm font-medium', errors.phone && 'text-destructive')}
+        >
+          Phone Number <span className="required text-red-500">*</span>
+        </Label>
+        <div className="phone_input_group flex gap-3">
           <Select
-            id="phonePrefix"
-            className="phone_prefix"
-            options={[
-              { value: '+91', text: '+91' },
-              { value: '+1', text: '+1' },
-              { value: '+44', text: '+44' },
-              { value: '+61', text: '+61' },
-              { value: '+81', text: '+81' },
-            ]}
-            {...register('phonePrefix')}
-          />
+            value={phonePrefix}
+            onValueChange={(value) => setValue('phonePrefix', value)}
+          >
+            <SelectTrigger className="phone_prefix w-24 flex-shrink-0">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="+91">+91</SelectItem>
+              <SelectItem value="+1">+1</SelectItem>
+              <SelectItem value="+44">+44</SelectItem>
+              <SelectItem value="+61">+61</SelectItem>
+              <SelectItem value="+81">+81</SelectItem>
+            </SelectContent>
+          </Select>
           <Input
             type="tel"
             id="phone"
             placeholder="Enter your number"
             maxLength={10}
+            className={cn(
+              'flex-1 transition-all',
+              errors.phone && 'border-destructive focus-visible:ring-destructive'
+            )}
             {...register('phone')}
           />
         </div>
         {errors.phone && (
-          <span className="errorMsg">{errors.phone.message}</span>
+          <span className="errorMsg text-destructive text-sm mt-1 block animate-shake">
+            {errors.phone.message}
+          </span>
         )}
       </div>
 
-      <div className="form">
-        <Label text="Date of Last Visit" htmlFor="lastVisit" />
-        <Input type="date" id="lastVisit" {...register('lastVisit')} />
+      <div className="form mb-6">
+        <div className="flex items-center gap-2 mb-2">
+          <Label htmlFor="lastVisit" className="text-sm font-medium">
+            Date of Last Visit
+          </Label>
+          <span className="optional text-xs text-muted-foreground">(optional)</span>
+        </div>
+        <Input
+          type="date"
+          id="lastVisit"
+          className={cn(
+            'w-full transition-all',
+            errors.lastVisit && 'border-destructive focus-visible:ring-destructive'
+          )}
+          {...register('lastVisit')}
+        />
         {errors.lastVisit && (
-          <span className="errorMsg">{errors.lastVisit.message}</span>
+          <span className="errorMsg text-destructive text-sm mt-1 block animate-shake">
+            {errors.lastVisit.message}
+          </span>
         )}
       </div>
 
-      <div className="next_form">
+      <div className="next_form flex justify-end mt-8">
         <Button
-          text="Next →"
-          className="btn next_btn"
           type="button"
           onClick={handleNext}
-        />
+          className="btn next_btn w-full sm:w-auto bg-primary-light hover:bg-primary text-white px-8"
+        >
+          Next →
+        </Button>
       </div>
     </div>
   );

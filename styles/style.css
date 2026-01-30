@@ -4,9 +4,9 @@
   --color-text-primary: #333333;
   --color-text-secondary: #666666;
   --color-text-white: #ffffff;
-  --color-primary: #2e7d32;
-  --color-primary-dark: #1b5e20;
-  --color-primary-light: #4caf50;
+  --color-primary: #2e7d32; /* green_50*/
+  --color-primary-dark: #1b5e20; /* green_dark_50*/
+  --color-primary-light: #4caf50; /* green_light_50*/
   --color-border: #e0e0e0;
   --color-hover-bg: #f5f5f5;
   --color-input-bg: #ffffff;

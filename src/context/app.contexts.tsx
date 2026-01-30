@@ -1,13 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import type {
-  AppState,
-  AppointmentFormData,
-  FormState,
-} from '../types/form.types';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { AppointmentFormData, FormState } from '../types/form.types';
 import type { Theme } from '../types/theme.types';
-import { loadFromStorage, saveToStorage } from '../db/storage.db';
-import { loadTheme, saveTheme } from '../components/theme/theme';
 
 const initialFormData: FormState = {
   email: '',
@@ -30,7 +24,20 @@ const initialFormData: FormState = {
   notifications: [],
 };
 
-interface AppContextType extends AppState {
+interface AppState {
+  currentStep: number;
+  totalSteps: number;
+  appointments: AppointmentFormData[];
+  formData: FormState;
+  isEditMode: boolean;
+  editingId: string | null;
+  theme: Theme;
+  isModalOpen: boolean;
+  searchQuery: string;
+  sortField: keyof AppointmentFormData | null;
+  sortDirection: 'asc' | 'desc';
+  currentPage: number;
+  itemsPerPage: number;
   setCurrentStep: (step: number) => void;
   setAppointments: (appointments: AppointmentFormData[]) => void;
   setFormData: (data: FormState) => void;
@@ -39,104 +46,86 @@ interface AppContextType extends AppState {
   addAppointment: (appointment: AppointmentFormData) => void;
   updateAppointment: (id: string, appointment: AppointmentFormData) => void;
   deleteAppointment: (id: string) => void;
-  theme: Theme;
   toggleTheme: () => void;
+  setModalOpen: (isOpen: boolean) => void;
+  setSearchQuery: (query: string) => void;
+  setSortField: (field: keyof AppointmentFormData | null) => void;
+  toggleSortDirection: () => void;
+  setCurrentPage: (page: number) => void;
 }
 
-const AppContext = createContext<AppContextType | undefined>(undefined);
+export const useAppStore = create<AppState>()(
+  persist(
+    (set, get) => ({
+      currentStep: 1,
+      totalSteps: 4,
+      appointments: [],
+      formData: initialFormData,
+      isEditMode: false,
+      editingId: null,
+      theme: 'light',
+      isModalOpen: false,
+      searchQuery: '',
+      sortField: null,
+      sortDirection: 'asc',
+      currentPage: 1,
+      itemsPerPage: 10,
+      setCurrentStep: (step) => set({ currentStep: step }),
+      setAppointments: (appointments) => set({ appointments }),
+      setFormData: (data) => set({ formData: data }),
+      setEditMode: (isEdit, id) => set({ isEditMode: isEdit, editingId: id }),
+      resetForm: () =>
+        set({
+          formData: initialFormData,
+          currentStep: 1,
+          isEditMode: false,
+          editingId: null,
+          isModalOpen: false,
+        }),
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [appointments, setAppointmentsState] = useState<AppointmentFormData[]>(
-    [],
-  );
-  const [formData, setFormDataState] = useState<FormState>(initialFormData);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [theme, setTheme] = useState<Theme>(loadTheme());
+      addAppointment: (appointment) =>
+        set((state) => ({
+          appointments: [...state.appointments, appointment],
+        })),
 
-  useEffect(() => {
-    const loaded = loadFromStorage();
-    setAppointmentsState(loaded);
-  }, []);
+      updateAppointment: (id, appointment) =>
+        set((state) => ({
+          appointments: state.appointments.map((apt) =>
+            apt.id === id ? appointment : apt,
+          ),
+        })),
 
-  useEffect(() => {
-    saveTheme(theme);
-  }, [theme]);
-
-  useEffect(() => {
-    saveToStorage(appointments);
-  }, [appointments]);
-
-  const setAppointments = (newAppointments: AppointmentFormData[]) => {
-    setAppointmentsState(newAppointments);
-  };
-
-  const setFormData = (data: FormState) => {
-    setFormDataState(data);
-  };
-
-  const setEditMode = (isEdit: boolean, id: string | null) => {
-    setIsEditMode(isEdit);
-    setEditingId(id);
-  };
-
-  const resetForm = () => {
-    setFormDataState(initialFormData);
-    setCurrentStep(1);
-    setIsEditMode(false);
-    setEditingId(null);
-  };
-
-  const addAppointment = (appointment: AppointmentFormData) => {
-    setAppointmentsState((prev) => [...prev, appointment]);
-    // resetForm()
-  };
-
-  const updateAppointment = (id: string, appointment: AppointmentFormData) => {
-    setAppointmentsState((prev) =>
-      prev.map((apt) => (apt.id === id ? appointment : apt)),
-    );
-    // resetForm()
-  };
-
-  const deleteAppointment = (id: string) => {
-    setAppointmentsState((prev) => prev.filter((apt) => apt.id !== id));
-    resetForm();
-  };
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  };
-
-  const value: AppContextType = {
-    currentStep,
-    totalSteps: 4,
-    appointments,
-    formData,
-    isEditMode,
-    editingId,
-    theme,
-    setCurrentStep,
-    setAppointments,
-    setFormData,
-    setEditMode,
-    resetForm,
-    addAppointment,
-    updateAppointment,
-    deleteAppointment,
-    toggleTheme,
-  };
-
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-};
-
-export const useAppContext = (): AppContextType => {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error('wrapped withing app proiders');
-  }
-  return context;
-};
+      deleteAppointment: (id) =>
+        set((state) => ({
+          appointments: state.appointments.filter((apt) => apt.id !== id),
+          formData: initialFormData,
+          currentStep: 1,
+          isEditMode: false,
+          editingId: null,
+          currentPage: 1,
+        })),
+        
+      toggleTheme: () => {
+        const nextTheme = get().theme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        set({ theme: nextTheme });
+      },
+      setModalOpen: (isOpen) => set({ isModalOpen: isOpen }),
+      setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
+      setSortField: (field) => set({ sortField: field, currentPage: 1 }),
+      toggleSortDirection: () =>
+        set((state) => ({
+          sortDirection: state.sortDirection === 'asc' ? 'desc' : 'asc',
+          currentPage: 1,
+        })),
+      setCurrentPage: (page) => set({ currentPage: page }),
+    }),
+    {
+      name: 'appointments',
+      partialize: (state) => ({
+        appointments: state.appointments,
+        theme: state.theme,
+      }),
+    },
+  ),
+);
