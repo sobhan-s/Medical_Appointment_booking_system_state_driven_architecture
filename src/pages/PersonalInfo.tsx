@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Label } from '../components/ui/Label';
-import { Input } from '../components/ui/Input';
+import { Input } from '../components/ui/input';
 import { Select } from '../components/ui/Selects';
 import { Button } from '../components/ui/Button';
 import { useAppContext } from '../context/app.contexts';
@@ -33,7 +33,6 @@ export const PersonalInfo: React.FC = () => {
     <div className="form_step active" data-step="1">
       <h2 className="basicInfo">Basic information</h2>
 
-      {/* Email Field */}
       <div className="form">
         <Label text="Email" required htmlFor="email" />
         <Input

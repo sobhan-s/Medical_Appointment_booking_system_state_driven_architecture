@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useAppContext } from '../../context/app.contexts';
 import {
   sortAppointments,
@@ -8,10 +8,16 @@ import {
 import type { AppointmentFormData } from '../../types/form.types';
 
 export const AppointmentsTable: React.FC = () => {
-  const {appointments, deleteAppointment, setEditMode, setFormData, setCurrentStep } =
-    useAppContext();
+  const {
+    appointments,
+    deleteAppointment,
+    setEditMode,
+    setFormData,
+    setCurrentStep,
+  } = useAppContext();
 
   // const appointmentListFromLocalStorage = loadFromStorage();
+  // const inputRef = useRef(null);
 
   const sortedAppointments = sortAppointments(appointments);
 
@@ -34,9 +40,24 @@ export const AppointmentsTable: React.FC = () => {
     }
   };
 
+  // const handleInput = () => {
+  //   const serchedName = inputRef.current.value as string;
+  //   console.log(serchedName);
+  //   console.log(appointments);
+  //   const filteredRecord = appointments.filter((record) => {
+  //     return record.name.trim().toLowerCase().includes(serchedName)
+  //   });
+  // };
+
+  // console.log(handleInput);
+
+  console.log('renderasdfasd');
+
   return (
     <div className="tableContainer" id="tableContainer">
       <div className="tableWrapper">
+        {/* <input type="text" ref={inputRef} />
+        <button onClick={handleInput}>check</button> */}
         <table id="appointmentsTable">
           <thead className="tableHead">
             <tr className="tableRow">

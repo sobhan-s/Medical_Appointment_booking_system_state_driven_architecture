@@ -108,7 +108,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.medicalRecord && (
-            <span className="erroMsg">
+            <span className="errorMsg">
               {errors.medicalRecord.message}
             </span>
           )}
@@ -129,7 +129,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.consultationType && (
-            <span className="erroMsg">
+            <span className="errorMsg">
               {errors.consultationType.message}
             </span>
           )}
@@ -162,7 +162,7 @@ export const FinalDetails: React.FC = () => {
             />
           </div>
           {(errors.term1 || errors.term2) && (
-            <span className="erroMsg">
+            <span className="errorMsg">
               {errors.term1?.message || errors.term2?.message}
             </span>
           )}
@@ -183,7 +183,7 @@ export const FinalDetails: React.FC = () => {
             ))}
           </div>
           {errors.notifications && (
-            <span className="erroMsg">
+            <span className="errorMsg">
               {errors.notifications.message}
             </span>
           )}

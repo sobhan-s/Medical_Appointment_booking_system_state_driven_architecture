@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Label } from '../components/ui/Label';
-import { Input } from '../components/ui/Input';
+import { Input } from '../components/ui/input';
 import { Select } from '../components/ui/Selects';
 import { TextArea } from '../components/ui/TextArea';
 import { Button } from '../components/ui/Button';
@@ -75,7 +75,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('doctor')}
         />
         {errors.doctor && (
-          <span className="erroMsg">{errors.doctor.message}</span>
+          <span className="errorMsg">{errors.doctor.message}</span>
         )}
       </div>
 
@@ -87,7 +87,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('appointmentDate')}
         />
         {errors.appointmentDate && (
-          <span className="erroMsg">
+          <span className="errorMsg">
             {errors.appointmentDate.message}
           </span>
         )}
@@ -123,7 +123,7 @@ export const AppointmentInfo: React.FC = () => {
           {...register('reasonForVisit')}
         />
         {errors.reasonForVisit && (
-          <span className="erroMsg">{errors.reasonForVisit.message}</span>
+          <span className="errorMsg">{errors.reasonForVisit.message}</span>
         )}
         <small style={{ display: 'block', marginTop: '5px', color: '#666' }}>
           Minimum 10 characters, Maximum 200 characters

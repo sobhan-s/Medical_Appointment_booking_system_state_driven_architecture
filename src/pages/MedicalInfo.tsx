@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { Label } from '../components/ui/Label';
-import { Input } from '../components/ui/Input';
+import { Input } from '../components/ui/input';
 // import { Checkbox } from '../components/ui/CheckBox';
 import { TextArea } from '../components/ui/TextArea';
 import { Button } from '../components/ui/Button';
@@ -109,7 +109,7 @@ export const MedicalInfo: React.FC = () => {
           )}
         </div>
         {errors.healthConcerns && (
-          <span className="erroMsg">{errors.healthConcerns.message}</span>
+          <span className="errorMsg">{errors.healthConcerns.message}</span>
         )}
       </div>
 
