@@ -1,5 +1,5 @@
 import { Button } from './Button';
-import { Input } from './Input';
+import { Input } from './input';
 import { Label } from './Label';
 import { Radio } from './Radio';
 import { Select } from './Selects';
